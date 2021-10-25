@@ -155,6 +155,7 @@ class FandomPage(object):
         soup = BeautifulSoup(request.text, 'html.parser')
         sources = soup.select(
             "#content > div > div.ve-init-mw-desktopArticleTarget-originalContent > div.oo-ui-widget.ve-ui-surface.ve-ui-surface-source.ve-ui-mwSurface.ve-ui-mwWikitextSurface.ve-ui-sourceEditorSurface.ve-init-mw-target-surface.ve-ui-surface-dir-ltr.mw-editfont-monospace p")
+        print(sources)
         for source in sources:
             content = source.contents
             self.source = self.source + '\n' + content
