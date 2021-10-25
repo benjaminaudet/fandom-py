@@ -159,6 +159,8 @@ class FandomPage(object):
         print(self.selector)
         test = soup.find(self.selector[0])
         print('debug')
+        if test is None:
+            return ''
         return test.text.strip()
         sources = soup.find_all(self.selector[0], class_=self.selector[1])
         print(sources)
