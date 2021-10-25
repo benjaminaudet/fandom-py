@@ -157,14 +157,8 @@ class FandomPage(object):
         print(self.urlSource)
         soup = BeautifulSoup(request.text, 'html.parser')
         print(self.selector)
-        tags = []
         test = soup.find_all(self.selector[0])
-        for x in test:
-            tags.extend(
-                (i.prettify()
-                 for i in x.find('p', class_='ve-ce-branchNode'))
-            )
-        return tags
+        return test
         print(test)
         sources = soup.find_all(self.selector[0], class_=self.selector[1])
         print(sources)
