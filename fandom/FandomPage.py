@@ -143,7 +143,7 @@ class FandomPage(object):
         return self._html
 
     @property
-    def source(self):
+    def source(self, selector):
         """
         Get source code.
 
@@ -153,8 +153,7 @@ class FandomPage(object):
         request = requests.get(self.urlSource)
         print(self.urlSource)
         soup = BeautifulSoup(request.text, 'html.parser')
-        sources = soup.select(
-            "#content > div > div.ve-init-mw-desktopArticleTarget-originalContent > div.oo-ui-widget.ve-ui-surface.ve-ui-surface-source.ve-ui-mwSurface.ve-ui-mwWikitextSurface.ve-ui-sourceEditorSurface.ve-init-mw-target-surface.ve-ui-surface-dir-ltr.mw-editfont-monospace p")
+        sources = soup.select(selector)
         print(sources)
         for source in sources:
             content = source.contents
