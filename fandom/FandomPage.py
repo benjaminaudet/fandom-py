@@ -149,7 +149,7 @@ class FandomPage(object):
 
         if not getattr(self, '_html', False):
             request = requests.get(self.url)
-            soup = BeautifulSoup(request.text)
+            soup = BeautifulSoup(request.text, 'html.parser')
             sources = soup.select(
                 "#content > div > div.ve-init-mw-desktopArticleTarget-originalContent > div.oo-ui-widget.ve-ui-surface.ve-ui-surface-source.ve-ui-mwSurface.ve-ui-mwWikitextSurface.ve-ui-sourceEditorSurface.ve-init-mw-target-surface.ve-ui-surface-dir-ltr.mw-editfont-monospace p")
         for source in sources:
