@@ -57,6 +57,9 @@ class FandomPage(object):
         except:
             return False
 
+    def set_selector(self, selector=""):
+        self.selector = selector
+
     def __load(self, redirect=True, preload=False):
         """
         Load basic information from fandom.
@@ -143,7 +146,7 @@ class FandomPage(object):
         return self._html
 
     @property
-    def source(self, selector):
+    def source(self):
         """
         Get source code.
 
@@ -153,7 +156,7 @@ class FandomPage(object):
         request = requests.get(self.urlSource)
         print(self.urlSource)
         soup = BeautifulSoup(request.text, 'html.parser')
-        sources = soup.select(selector)
+        sources = soup.select(self.selector)
         print(sources)
         for source in sources:
             content = source.contents
