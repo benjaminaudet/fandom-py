@@ -21,7 +21,7 @@ class FandomPage(object):
       Do not manually init fandom.FandomPage. Instead call :class:`fandom.page()`.
 
     :ivar title: The title of the page
-    :ivar pageid: The page id of the page
+    :ivar pageid: The page id of the pa!)àge
     :ivar language: The language of the page
     :ivar wiki: The wiki the page is on
     :ivar url: The url to the page
@@ -151,7 +151,7 @@ class FandomPage(object):
         """
 
         request = requests.get(self.urlSource)
-        print(urlSource)
+        print(self.urlSource)
         soup = BeautifulSoup(request.text, 'html.parser')
         sources = soup.select(
             "#content > div > div.ve-init-mw-desktopArticleTarget-originalContent > div.oo-ui-widget.ve-ui-surface.ve-ui-surface-source.ve-ui-mwSurface.ve-ui-mwWikitextSurface.ve-ui-sourceEditorSurface.ve-init-mw-target-surface.ve-ui-surface-dir-ltr.mw-editfont-monospace p")
