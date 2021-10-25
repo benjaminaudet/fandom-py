@@ -8,7 +8,8 @@ import copy
 from bs4 import BeautifulSoup, NavigableString, Tag
 
 
-STANDARD_URL = 'https://{wiki}.fandom.com/{lang}/wiki/{page}?veaction=editsource'
+STANDARD_URL = 'https://{wiki}.fandom.com/{lang}/wiki/{page}'
+STANDARD_URL_SOURCE = 'https://{wiki}.fandom.com/{lang}/wiki/{page}?veaction=editsource'
 
 
 class FandomPage(object):
@@ -88,6 +89,8 @@ class FandomPage(object):
         lang = query_params['lang']
         self.url = STANDARD_URL.format(lang=lang, wiki=self.wiki,
                                        page=self.title.replace(" ", "_").replace("?", "%3F"))
+        self.urlSource = STANDARD_URL_SOURCE.format(lang=lang, wiki=self.wiki,
+                                                   page=self.title.replace(" ", "_").replace("?", "%3F"))
 
     def __continued_query(self, query_params):
         """
@@ -148,7 +151,7 @@ class FandomPage(object):
         """
 
         if not getattr(self, '_html', False):
-            request = requests.get(self.url)
+            request = requests.get(self.urlSource)
             soup = BeautifulSoup(request.text, 'html.parser')
             sources = soup.select(
                 "#content > div > div.ve-init-mw-desktopArticleTarget-originalContent > div.oo-ui-widget.ve-ui-surface.ve-ui-surface-source.ve-ui-mwSurface.ve-ui-mwWikitextSurface.ve-ui-sourceEditorSurface.ve-init-mw-target-surface.ve-ui-surface-dir-ltr.mw-editfont-monospace p")
