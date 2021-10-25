@@ -90,7 +90,7 @@ class FandomPage(object):
         self.url = STANDARD_URL.format(lang=lang, wiki=self.wiki,
                                        page=self.title.replace(" ", "_").replace("?", "%3F"))
         self.urlSource = STANDARD_URL_SOURCE.format(lang=lang, wiki=self.wiki,
-                                                   page=self.title.replace(" ", "_").replace("?", "%3F"))
+                                                    page=self.title.replace(" ", "_").replace("?", "%3F"))
 
     def __continued_query(self, query_params):
         """
@@ -145,7 +145,7 @@ class FandomPage(object):
     @property
     def source(self):
         """
-        Get full page HTML.
+        Get source code.
 
         :returns: :class:`str`
         """
