@@ -156,8 +156,9 @@ class FandomPage(object):
         request = requests.get(self.urlSource)
         print(self.urlSource)
         soup = BeautifulSoup(request.text, 'html.parser')
-        print(request.text)
         print(self.selector)
+        test = soup.find("p")
+        print(test)
         sources = soup.find_all(self.selector[0], class_=self.selector[1])
         print(sources)
         for source in sources:
