@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 
 
 STANDARD_URL = 'https://{wiki}.fandom.com/{lang}/wiki/{page}'
-STANDARD_URL_SOURCE = 'https://{wiki}.fandom.com/{lang}/wiki/{page}?veaction=editsource'
+STANDARD_URL_SOURCE = 'https://{wiki}.fandom.com/{lang}/wiki/{page}?action=edit'
 
 
 class FandomPage(object):
