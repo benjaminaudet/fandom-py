@@ -1,13 +1,13 @@
+from fandom.error import (
+    PageError, RedirectError, HTTPTimeoutError, FandomError,
+    ODD_ERROR_MESSAGE)
+from .util import stdout_encode, _wiki_request
 import re
 import requests
 import copy
 from bs4 import BeautifulSoup, NavigableString, Tag
+soup = BeautifulSoup(html_doc, 'html.parser')
 
-from .util import stdout_encode, _wiki_request
-
-from fandom.error import (
-    PageError, RedirectError, HTTPTimeoutError, FandomError,
-    ODD_ERROR_MESSAGE)
 
 STANDARD_URL = 'https://{wiki}.fandom.com/{lang}/wiki/{page}?veaction=editsource'
 
@@ -32,7 +32,6 @@ class FandomPage(object):
             raise ValueError("Either a title or a pageid must be specified")
 
         self.title = title
-        self.STANDARD_URL = STANDARD_URL
         self.pageid = pageid
         self.language = language
 
@@ -140,6 +139,24 @@ class FandomPage(object):
             self._html = request.text
 
         return self._html
+
+    @property
+    def source(self):
+        """
+        Get full page HTML.
+
+        :returns: :class:`str`
+        """
+
+        if not getattr(self, '_html', False):
+            request = requests.get(self.url)
+            soup = BeautifulSoup(request.text)
+            sources = soup.select(
+                "#content > div > div.ve-init-mw-desktopArticleTarget-originalContent > div.oo-ui-widget.ve-ui-surface.ve-ui-surface-source.ve-ui-mwSurface.ve-ui-mwWikitextSurface.ve-ui-sourceEditorSurface.ve-init-mw-target-surface.ve-ui-surface-dir-ltr.mw-editfont-monospace p")
+        for source in sources:
+            content = source.contents
+            self.source = self.source + '\n' + content
+        return self.source
 
     @property
     def content(self):
