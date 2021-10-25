@@ -6,7 +6,6 @@ import re
 import requests
 import copy
 from bs4 import BeautifulSoup, NavigableString, Tag
-soup = BeautifulSoup(html_doc, 'html.parser')
 
 
 STANDARD_URL = 'https://{wiki}.fandom.com/{lang}/wiki/{page}?veaction=editsource'
